@@ -2,27 +2,35 @@
 <html>
 <head>
     <style>
-        .error{color: red;}
+        .error{
+            color: red;
+        }
+        label { 
+            display: block;
+        }
     </style>
 <title>SIGN UP</title>
 </head>
     <body>
-        <form action='/' method='POST'>
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username" value="{{username}}">
-            <p class="error">{{username_error}}</p>
-            <!--<label for="password">Password
-            <input type="text" name="password" id="password" value="{{password}}">
+    <h1> This is a Sign-Up Sheet! </h1>
+        <form method='POST'>
+            <label name= "username">Username:
+                <input type="text" name="username" value="{{username}}"/>
+                <span class="error">{{username_error}}</span>
             </label>
-            <p class="error">{{password_error}}</p>
+            <label name="password">Password:
+                <input type="text" name="password" value="{{password}}"/>
+                <span class="error">{{password_error}}</span>
             </label>
-            <label for="verify_password">Verify Password:
-            <input type="text" name="verify_password" id="verify_password" value="{{verify_password}}">
+            <label name="password_verify">PW Verify:
+                <input type="text" name="password_verify" value="{{password_verify}}"/>
+                <span class="error">{{password_verify_error}}</span>
             </label>
-            <label for="email">
-                
-            </label>-->
-        </form>
+            <label name="email">E-mail
+                <input type="text" name="email" value="{{email}}"/>
+                <span class="error">{{email_error}}</span>
+            </label>
+            <input type="submit" />
     </body>
 </html>
 
