@@ -13,6 +13,7 @@
 from flask import Flask, request, render_template, redirect
 import cgi
 import os
+import re
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -49,35 +50,9 @@ def validate_password(password, password_verify):
     return password, password_error, password_verify, password_verify_error
 def validate_email(email):
     email, email_error = email, ""
-    at = 0
-    dot = 0
-    if len(email) != 0:
-        if len(email) < 3:
-            email_error = "plz use 3 or more chars"
-            email = ""
-        if len(email) > 20:
-            email_error = "plz use less than 20 chars"
-            email = ""
-        for char in email:
-            if char == "@":
-                at += 1
-                if at > 1:
-                    email_error = "plz only use 1 @ symbol!"
-                    email = ""
-            if char == ".":
-                dot += 1
-                if dot > 1:
-                    email_error = "plz only use 1 period!"
-                    dot = ""
-            if char == " ":
-                email_error = "plz no spaces!"
-                email = ""
-        if at == 0:
-            email_error = "plz use 1 @ symbol!"
-            email = ""
-        if dot == 0:
-            email_error = "plz use a period!"
-            email = ""
+    if not re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email):
+        email_error = "not a valid email"
+        email = ""
     return email, email_error
 
 @app.route('/', methods=["POST", "GET"])
